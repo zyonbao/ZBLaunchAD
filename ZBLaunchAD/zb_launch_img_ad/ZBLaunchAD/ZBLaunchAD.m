@@ -35,6 +35,7 @@
         [self.view addSubview:_containerView];
     }
 }
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     if (_containerView) {
@@ -56,6 +57,8 @@
 
 @end
 
+
+
 @interface ZBLaunchADWindow : UIWindow
 
 @property (nonatomic, weak) id <ZBLaunchWindowDataSource> dataSource;
@@ -73,18 +76,21 @@
         [self.dataSource adViewShouldDismissWithType:ZBLaunchADCallBackTypeADClick sender:recognizer];
     }
 }
+
 #pragma mark - 跳过广告
 - (void)skipBtnClick:(id)sender{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(adViewShouldDismissWithType:sender:)]) {
         [self.dataSource adViewShouldDismissWithType:ZBLaunchADCallBackTypeBtnSkip sender:sender];
     }
 }
+
 #pragma mark - 广告展示结束
 - (void)adEndShowAction{
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(adViewShouldDismissWithType:sender:)]) {
         [self.dataSource adViewShouldDismissWithType:ZBLaunchADCallBackTypeEndShow sender:nil];
     }
 }
+
 #pragma mark - 开启关闭动画
 - (void)closeAnimation{
     CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -110,11 +116,13 @@
     opacityAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     [self.layer addAnimation:opacityAnimation forKey:@"animateOpacity"];
 }
+
 #pragma mark - 关闭动画完成时处理事件
 -(void)closeADView{
     self.dataSource = nil;
     self.hidden = YES;
 }
+
 #pragma mark - 计算布局
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -144,6 +152,7 @@
         }
     }
 }
+
 #pragma mark - getters & setters
 - (UIButton *)skipBtn{
     if (!_skipBtn) {
@@ -161,6 +170,7 @@
     }
     return _skipBtn;
 }
+
 - (UIImageView *)adImageView{
     if (!_adImageView) {
         _adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, mainHeight - mainWidth/3)];
@@ -171,6 +181,7 @@
     }
     return _adImageView;
 }
+
 - (UIImageView *)logoImageView{
     if (!_logoImageView) {
         _logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, mainWidth/3)];
@@ -179,6 +190,7 @@
     }
     return _logoImageView;
 }
+
 #pragma mark - cofigSubViews
 - (void)setupSubViews:(ZBLaunchADType)type{
     [self addSubview:self.adImageView];
