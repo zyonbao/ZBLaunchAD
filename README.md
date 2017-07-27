@@ -25,4 +25,4 @@ ZBLaunchAD 是一个便捷的启动屏广告类
 
 可以在回调方法 `handlerBlock` 中处理点击回调。
 
-PS: 改代码依赖于 `SDWebImage`
+PS: 该代码依赖于 `SDWebImage`
